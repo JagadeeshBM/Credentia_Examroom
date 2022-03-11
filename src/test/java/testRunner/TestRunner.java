@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
         glue = "stepDefinitions",
         dryRun =false,
         monochrome =false,
-        plugin = {"pretty","html:test-output"},
+       // plugin = {"pretty","html:test-output"},
+        plugin = {"pretty","html:target/cucumber-report/cucumber.json"},
         tags="@Application or @AppApprove or @RegisterForExam"
         //tags="@Application or @AppApprove"
         //tags="@RegisterForExam"
