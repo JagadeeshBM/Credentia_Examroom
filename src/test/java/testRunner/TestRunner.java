@@ -9,10 +9,12 @@ import org.junit.runner.RunWith;
         dryRun =false,
         monochrome =false,
        // plugin = {"pretty","html:test-output"},
-        plugin = {"pretty","html:target/cucumber-report/cucumber.json"},
+        //plugin = {"pretty","html:target/cucumber-report/cucumber.json"},
+        plugin={"html:target/cucumber-html-report","json:target/cucumber-report/cucumber.json","junit:target/cucumber-report/cucumber.xml"},
         tags="@Application or @AppApprove or @RegisterForExam"
+       // tags="@ClearDB or @Application or @AppApprove or @RegisterForExam"
         //tags="@Application or @AppApprove"
-        //tags="@RegisterForExam"
+        //tags="@ClearDB"
         //tags="@ClearDB or @Application or @AppApprove or @RegisterForExam"
         //tags={"@AppApprove"}
 )

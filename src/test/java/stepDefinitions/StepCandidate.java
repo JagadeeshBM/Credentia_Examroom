@@ -35,6 +35,9 @@ public class StepCandidate {
     public void connect_to_DB() throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:sqlserver:@localhost:1433/ExamRoomV2UAT", "ExamRoomV2UatUser", "S0oprS3cur1t3M@n");
         // Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com/ExamRoomV2UAT","ExamRoomV2UatUser","S0oprS3cur1t3M@n");
+        //Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com;databaseName=ExamRoomV2UAT","ExamRoomV2UatUser","S0oprS3cur1t3M@n");
+
+
         Statement stmt = con.createStatement();
         String query = "GO\n" +
                 "declare @emailId varchar(100) ='jmcandidatems@mailinator.com';\n" +
