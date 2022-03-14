@@ -127,19 +127,5 @@
     </dependencies>
 
 
-    <build>
-        <!-- possible other stuff -->
-        <plugins>
-            <!-- possible other stuff -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.1</version>
-                <executions>
-                    <!-- stuff here -->
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
