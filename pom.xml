@@ -115,12 +115,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.0.0-M5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/net.masterthought/maven-cucumber-reporting -->
-        <dependency>
-            <groupId>net.masterthought</groupId>
-            <artifactId>maven-cucumber-reporting</artifactId>
-            <version>5.6.2</version>
-        </dependency>
+
 
         <!--Latest Cucumber JVM Reports  plugin -->
 
