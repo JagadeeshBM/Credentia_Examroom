@@ -57,6 +57,6 @@ Feature: Candidate_Validate End to End Review process Flow for Eligibility Route
     When Click on saved card radio button
     And Enter CVV
     And Click on Pay button
-    Then Validate Payment Successful message
+    Then Validate ExamBooked message
     And Validate Status should be changed to Exam scheduled in Exam Schedule Board.
     And Click on Dashboard and take the screen shot of it
