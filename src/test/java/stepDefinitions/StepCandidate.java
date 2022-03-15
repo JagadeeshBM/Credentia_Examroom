@@ -519,7 +519,7 @@ public class StepCandidate {
     @When("Select Range")
     public void select_Range() throws InterruptedException {
         driver.findElement(By.xpath("//button[@class='mat-focus-indicator mat-stroked-button mat-button-base mat-light px-4 ml-3 mb-3 pt-3 pb-3 state slots2 buttom6 active ng-star-inserted']")).click();
-
+//Xpath issue
         Thread.sleep(800);
     }
 
@@ -639,19 +639,23 @@ public class StepCandidate {
     }
 
     @Then("Validate Payment Successful message")
-    public void validate_Payment_Successfull_message() {
+    public void validate_Payment_Successfull_message() throws InterruptedException {
 //*[@id="cdk-overlay-43"]/snack-bar-container/div/div/app-snackbar/div/div[2]/p
         String actual_status = driver.findElement(By.xpath("//p[normalize-space()='Payment Successful']")).getText();
         String expected_status = "Payment Successful";
         //Type1
         Assert.assertEquals(actual_status, expected_status);
-
+        Thread.sleep(1000);
 
     }
 
     @Then("Validate Status should be changed to Exam scheduled in Exam Schedule Board.")
     public void validate_Status_shoud_be_changed_to_Exam_scheduled_in_Exam_Schedule_Board() throws IOException {
         String actual_status = driver.findElement(By.xpath("//span[@class='t-xs ml-2 active2 ml-2']")).getText();
+     //span[@class='t-xs ml-2 active2 ml-2']
+        //issue
+        ///html/body/exai-root/exai-custom-layout/exai-layout/div/mat-sidenav-container/mat-sidenav-content/main/exai-scheduled/div/div[1]/div[3]/div/div/div/div/div[2]/div/span
+        ///html/body/exai-root/exai-custom-layout/exai-layout/div/mat-sidenav-container/mat-sidenav-content/main/exai-scheduled/div/div[1]/div[3]/div/div/div/div/div[2]/div/span
         String expected_status = "Exam Scheduled";
         //Type1
         Assert.assertEquals(actual_status, expected_status);
