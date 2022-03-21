@@ -4,8 +4,10 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features ="C:\\Users\\jagadeeshm\\IdeaProjects\\Credentia_Examroom\\Features\\Candidate.feature",
-        glue = "stepDefinitions",
+@CucumberOptions(
+        //features ="C:\\Users\\jagadeeshm\\IdeaProjects\\Credentia_Examroom\\Features\\Candidate.feature",
+        features ="C:\\Users\\jagadeeshm\\IdeaProjects\\Credentia_Examroom\\Features\\ER 2.feature",
+        glue = "stepDefinitionsMSER2",
         dryRun =false,
         monochrome =false,
        // plugin = {"pretty","html:test-output"},
@@ -13,7 +15,7 @@ import org.junit.runner.RunWith;
         plugin={"html:target/cucumber-html-report","json:target/cucumber-report/cucumber.json","junit:target/cucumber-report/cucumber.xml"},
         tags="@Application or @AppApprove or @RegisterForExam"
        // tags="@ClearDB or @Application or @AppApprove or @RegisterForExam"
-        //tags="@Application or @AppApprove"
+        //tags="@AppApprove or @RegisterForExam"
         //tags="@ClearDB"
         //tags="@RegisterForExam"
         //tags={"@AppApprove"}
