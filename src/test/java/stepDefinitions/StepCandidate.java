@@ -33,7 +33,7 @@ public class StepCandidate {
 
     @Given(": Connect to DB")
     public void connect_to_DB() throws SQLException {
-        Connection con = DriverManager.getConnection("jdbc:sqlserver:@localhost:1433/ExamRoomV2UAT", "ExamRoomV2UatUser", "S0oprS3cur1t3M@n");
+        Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;"+"databaseName=ExamRoomV2UAT", "ExamRoomV2UatUser", "S0oprS3cur1t3M@n");
         // Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com/ExamRoomV2UAT","ExamRoomV2UatUser","S0oprS3cur1t3M@n");
         //Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com;databaseName=ExamRoomV2UAT","ExamRoomV2UatUser","S0oprS3cur1t3M@n");
 
@@ -638,11 +638,11 @@ public class StepCandidate {
         Thread.sleep(30000);
     }
 
-    @Then("Validate Payment Successful message")
-    public void validate_Payment_Successfull_message() throws InterruptedException {
+    @Then("Validate ExamBooked message")
+    public void validate_exam_booked_message()  throws InterruptedException {
 //*[@id="cdk-overlay-43"]/snack-bar-container/div/div/app-snackbar/div/div[2]/p
-        String actual_status = driver.findElement(By.xpath("//p[normalize-space()='Payment Successful']")).getText();
-        String expected_status = "Payment Successful";
+        String actual_status = driver.findElement(By.xpath("//p[normalize-space()='Exams booked Sucessfully']")).getText();
+        String expected_status = "Exams booked Sucessfully";
         //Type1
         Assert.assertEquals(actual_status, expected_status);
         Thread.sleep(1000);
@@ -650,7 +650,7 @@ public class StepCandidate {
     }
 
     @Then("Validate Status should be changed to Exam scheduled in Exam Schedule Board.")
-    public void validate_Status_shoud_be_changed_to_Exam_scheduled_in_Exam_Schedule_Board() throws IOException {
+    public void validate_Status_shoud_be_changed_to_Exam_scheduled_in_Exam_Schedule_Board() throws IOException, InterruptedException {
         String actual_status = driver.findElement(By.xpath("//span[@class='t-xs ml-2 active2 ml-2']")).getText();
      //span[@class='t-xs ml-2 active2 ml-2']
         //issue
@@ -664,6 +664,8 @@ public class StepCandidate {
         File src = ts.getScreenshotAs(OutputType.FILE);
         File trg = new File(".\\screenshots\\ExamScheduled.png");
         FileUtils.copyFile(src, trg);
+        Thread.sleep(1000);
+
     }
     @Then("Click on Dashboard and take the screen shot of it")
     public void click_on_Dashboard_and_take_the_screen_shot_of_it() throws IOException, InterruptedException {

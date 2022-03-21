@@ -6,7 +6,8 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         //features ="C:\\Users\\jagadeeshm\\IdeaProjects\\Credentia_Examroom\\Features\\Candidate.feature",
-        features ="C:\\Users\\jagadeeshm\\IdeaProjects\\Credentia_Examroom\\Features\\ER 2.feature",
+       // features ="C:\\Users\\jagadeeshm\\IdeaProjects\\Credentia_Examroom\\Features\\ER 2.feature",
+        features =".\\Features\\ER 2.feature",
         glue = "stepDefinitionsMSER2",
         dryRun =false,
         monochrome =false,
