@@ -21,12 +21,26 @@ Feature: Candidate_Validate End to End Review process Flow for Eligibility Route
     And click on Start button
     When Candidate Fill the Application Form_EnterTraining Program
     And  Candidate Fill the Application Form_Select Course Completion Date
-    And  Select ACCOMMODATIONS as No
+    And  Select ACCOMMODATIONS as Yes
+    And Click on Accommodation Form
+    And Enter Request Accommodation details_Accommodation Type
+    And Enter Request Accommodation details_Request item type
+    And Enter Request Accommodation details_Exam type
+    And Enter Request Accommodation details_Reason for Accommodation
+    And Enter Permitted Contact Details_Name
+    And Enter Permitted Contact Details_Email
+    And Enter Permitted Contact Details_Phone Number
+    And Enter Permitted Contact Details_Relationship
+    And Enter I authorize Credentia to communicate with my contacts for the date range specified below_up to a maximum of one year
+    And Upload the form provided above based on your accommodation type selection, filled and Signed by appropriate medical professional
+    And Agree to Guidelines_Does your documentation contain a clear diagnosis and discuss the impacts of your diagnosis on your performance?
+    And Was the documentation completed by a professional qualified to diagnose your disorder?
+    And Was the documentation completed within the last 1 year?
     And  Certify REGISTRANT CERTIFICATION
     And  Click on Submit Button
     Then Candidate can view confirmation message  "Successfully Saved Response."
     #And close browser
-  @AppApprove
+  @AppApproveTP
   Scenario: Approve Application from Training program
     Given Launch Chrome Browser
     When TP opens URL "https://credentiauat.examroom.ai/"

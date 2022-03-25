@@ -1,4 +1,4 @@
-Feature: Candidate_Validate End to End Review process Flow for Eligibility Route 2 and Schedule the exam
+Feature: Candidate_Validate End to End Review process Flow for Eligibility Route 6 and Schedule the exam
   @ClearDB
   Scenario: Clear Application and exam from Database
     Given : Connect to DB
@@ -16,25 +16,28 @@ Feature: Candidate_Validate End to End Review process Flow for Eligibility Route
     #Then Candidate can view Dashboard details
     #When Candidate click on Dashboard
     And Click on Start New Application
-    And Click on Eligibility Route2
+    And Click on Eligibility Route6
     And click on check box
     And click on Start button
-    When Candidate Fill the Application Form_SECTION1 UPLOAD CERTIFICATE
+    And Candidate Fill the Application Form_SECTION 1_CERTIFICATE INFORMATION_Certificate Number
+    And Candidate Fill the Application Form_SECTION 1_CERTIFICATE INFORMATION_Date Certification was Revoked
+    And Candidate Fill the Application Form_SECTION 1-CERTIFICATE INFORMATION_Please upload a copy of your criminal background check(background check must be within the last 4 weeks from date of application)
+    And Candidate Fill the Application Form_SECTION 1_CERTIFICATE INFORMATION_Please upload 3 references
     And  Select ACCOMMODATIONS as No
     And  Certify REGISTRANT CERTIFICATION
     And  Click on Submit Button
     Then Candidate can view confirmation message  "Successfully Saved Response."
     #And close browser
-  @AppApproveOP
-  Scenario: Approve Application from Operation staff Credentia
+  @STCAppApprove
+  Scenario: Approve Application from State Client
     Given Launch Chrome Browser
-    When OP opens URL "https://credentiauat.examroom.ai/"
-    And OP click on GetStarted button
-    And  OP Enters Email as "testuser05@examroom.ai" and password as "Credentia$$15"
-    And OP click on login button
-    And OP click on Manage Applications
-    And OP Search with candidate name
-    And OP click on Action button for candidate
+    When STClient opens URL "https://credentiauat.examroom.ai/"
+    And STClient click on GetStarted button
+    And  STClient Enters Email as "jmstatems@mailinator.com" and password as "Exam@123"
+    And STClient click on login button
+    And STClient click on Manage Applications
+    And STClient Search with candidate name
+    And STClient click on Action button for candidate
     And Click on Approve Button for Approval
     Then Validate Approved success message
     Then login to candidate and validate approved status.

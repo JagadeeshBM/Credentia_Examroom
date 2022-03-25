@@ -1,4 +1,4 @@
-Feature: Candidate_Validate End to End Review process Flow for Eligibility Route 2 and Schedule the exam
+Feature: Candidate_Validate End to End Review process Flow for Eligibility Route 8 and Schedule the exam
   @ClearDB
   Scenario: Clear Application and exam from Database
     Given : Connect to DB
@@ -16,25 +16,26 @@ Feature: Candidate_Validate End to End Review process Flow for Eligibility Route
     #Then Candidate can view Dashboard details
     #When Candidate click on Dashboard
     And Click on Start New Application
-    And Click on Eligibility Route2
+    And Click on Eligibility Route8
     And click on check box
     And click on Start button
-    When Candidate Fill the Application Form_SECTION1 UPLOAD CERTIFICATE
+    And Candidate Fill the Application Form_SECTION1_UPLOAD TRANSCRIPT_Please upload a copy of your college transcript showing successful completion of the fundamentals_basic nursing skills section of a state approved LPN or RN program within the past twenty-four months
+    And Candidate Fill the Application Form_SECTION 1_Please upload letter from course instructor on school letterhead
     And  Select ACCOMMODATIONS as No
     And  Certify REGISTRANT CERTIFICATION
     And  Click on Submit Button
     Then Candidate can view confirmation message  "Successfully Saved Response."
     #And close browser
-  @AppApproveOP
-  Scenario: Approve Application from Operation staff Credentia
+  @STCAppApprove
+  Scenario: Approve Application from State Client
     Given Launch Chrome Browser
-    When OP opens URL "https://credentiauat.examroom.ai/"
-    And OP click on GetStarted button
-    And  OP Enters Email as "testuser05@examroom.ai" and password as "Credentia$$15"
-    And OP click on login button
-    And OP click on Manage Applications
-    And OP Search with candidate name
-    And OP click on Action button for candidate
+    When STClient opens URL "https://credentiauat.examroom.ai/"
+    And STClient click on GetStarted button
+    And  STClient Enters Email as "jmstatems@mailinator.com" and password as "Exam@123"
+    And STClient click on login button
+    And STClient click on Manage Applications
+    And STClient Search with candidate name
+    And STClient click on Action button for candidate
     And Click on Approve Button for Approval
     Then Validate Approved success message
     Then login to candidate and validate approved status.
