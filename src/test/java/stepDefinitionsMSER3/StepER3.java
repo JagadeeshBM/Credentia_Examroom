@@ -1,9 +1,16 @@
-package stepDefinitionsMSER2;
+package stepDefinitionsMSER3;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,22 +18,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class StepER2 {
+public class StepER3 {
     WebDriver driver;
     public static WebElement element;
 
-    public StepER2() {
+    public StepER3() {
     }
 
     public void main(String[] args) {
@@ -36,7 +33,7 @@ public class StepER2 {
     public void connect_to_DB() throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=ExamRoomV2UAT", "ExamRoomV2UatUser", "S0oprS3cur1t3M@n");
         Statement stmt = con.createStatement();
-        String query = "GO\ndeclare @emailId varchar(100) ='jmcandidatems1@mailinator.com';\ndeclare @persontenantroleId as int;\ndeclare @PID as int;\n\nselect @persontenantroleId = ptr.Id, @PID = p.Id\nfrom dbo.person p\ninner join dbo.PersonTenantRole ptr\non p.Id = ptr.PersonId\nand p.EmailId = @emailId\n\nselect @persontenantroleId = ptr.Id\nfrom dbo.person p\ninner join dbo.PersonTenantRole ptr\non p.Id = ptr.PersonId\nand p.EmailId = @emailId\nand ptr.PersonRoleId = 1\nwhere emailid = @emailId;\n\ndelete PFNF\nfrom dbo.PersonFormNoteFile PFNF\ninner join dbo.PersonFormNote PFN\non PFNF.PersonFormNOteId = PFN.Id\ninner join dbo.PersonForm PF\non PF.Id = PFN.PersonFormId\nand PF.PersonTenantRoleId = @persontenantroleId\n\ndelete PFN\nfrom dbo.PersonFormNote PFN\ninner join dbo.PersonForm PF\non PF.Id = PFN.PersonFormId\nand PF.PersonTenantRoleId = @persontenantroleId\n\ndelete sl from dbo.PersonForm pf\ninner join dbo.PersonFormStatusLog sl\non pf.id = sl.PersonFormId\nand pf.persontenantroleid = @persontenantroleId\n\ndelete pfr from dbo.PersonForm pf\ninner join dbo.PersonFormReview pfr\non pf.id = pfr.PersonFormId\nand pf.persontenantroleid = @persontenantroleId\n\ndelete pf from dbo.PersonForm pf\nwhere  pf.persontenantroleid = @persontenantroleId\n\n\ndelete pf from dbo.PersonEligibilityRoute pf\nwhere  pf.persontenantroleid = @persontenantroleId\n\nUPDATE PERSON SET DATADETAIL = JSON_MODIFY(DATADETAIL, '$.TrainingInstituteId', 0) WHERE ID = @PID\ndelete from Voucher where assigntopersonid= @PID\n\t\nupdate voucher set assigntopersonid=null\nwhere id in (select id from voucher where assigntopersonid in (select id from person where emailid='jmcandidatems1@mailinator.com '))\n";
+        String query = "GO\ndeclare @emailId varchar(100) ='jmcandidatems@mailinator.com';\ndeclare @persontenantroleId as int;\ndeclare @PID as int;\n\nselect @persontenantroleId = ptr.Id, @PID = p.Id\nfrom dbo.person p\ninner join dbo.PersonTenantRole ptr\non p.Id = ptr.PersonId\nand p.EmailId = @emailId\n\nselect @persontenantroleId = ptr.Id\nfrom dbo.person p\ninner join dbo.PersonTenantRole ptr\non p.Id = ptr.PersonId\nand p.EmailId = @emailId\nand ptr.PersonRoleId = 1\nwhere emailid = @emailId;\n\ndelete PFNF\nfrom dbo.PersonFormNoteFile PFNF\ninner join dbo.PersonFormNote PFN\non PFNF.PersonFormNOteId = PFN.Id\ninner join dbo.PersonForm PF\non PF.Id = PFN.PersonFormId\nand PF.PersonTenantRoleId = @persontenantroleId\n\ndelete PFN\nfrom dbo.PersonFormNote PFN\ninner join dbo.PersonForm PF\non PF.Id = PFN.PersonFormId\nand PF.PersonTenantRoleId = @persontenantroleId\n\ndelete sl from dbo.PersonForm pf\ninner join dbo.PersonFormStatusLog sl\non pf.id = sl.PersonFormId\nand pf.persontenantroleid = @persontenantroleId\n\ndelete pfr from dbo.PersonForm pf\ninner join dbo.PersonFormReview pfr\non pf.id = pfr.PersonFormId\nand pf.persontenantroleid = @persontenantroleId\n\ndelete pf from dbo.PersonForm pf\nwhere  pf.persontenantroleid = @persontenantroleId\n\n\ndelete pf from dbo.PersonEligibilityRoute pf\nwhere  pf.persontenantroleid = @persontenantroleId\n\nUPDATE PERSON SET DATADETAIL = JSON_MODIFY(DATADETAIL, '$.TrainingInstituteId', 0) WHERE ID = @PID\ndelete from Voucher where assigntopersonid= @PID\n\t\nupdate voucher set assigntopersonid=null\nwhere id in (select id from voucher where assigntopersonid in (select id from person where emailid='jmcandidatems@mailinator.com '))\n";
         stmt.executeQuery(query);
         System.out.println("Application is cleared successfully");
     }
@@ -74,7 +71,7 @@ public class StepER2 {
 
     @When("Candidate Enters Email as {string} and password as {string}")
     public void candidate_Enters_Email_as_and_password_as(String string, String string2) {
-        this.driver.findElement(By.xpath("//*[@id=\"mat-input-0\"]")).sendKeys(new CharSequence[]{"jmcandidatems1@mailinator.com"});
+        this.driver.findElement(By.xpath("//*[@id=\"mat-input-0\"]")).sendKeys(new CharSequence[]{"jmcandidatems@mailinator.com"});
         this.driver.findElement(By.xpath("//*[@id=\"mat-input-1\"]")).sendKeys(new CharSequence[]{"Exam@123"});
     }
 
@@ -91,16 +88,16 @@ public class StepER2 {
         element.click();
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\homepage_MSER2.png");
+        File trg = new File(".\\screenshots\\homepage_MSER3.png");
         FileUtils.copyFile(src, trg);
     }
 
     @And("Click on Eligibility Route{int}")
     public void clickOnEligibilityRoute(int arg0) throws IOException {
-        this.driver.findElement(By.xpath("//body//exai-root//exai-layout//button[2]")).click();
+        this.driver.findElement(By.xpath("//body//exai-root//exai-layout//button[3]")).click();
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\MSER2_ER_Validation.png");
+        File trg = new File(".\\screenshots\\MSER3_ER_Validation.png");
         FileUtils.copyFile(src, trg);
     }
 
@@ -127,11 +124,10 @@ public class StepER2 {
     @When("Select ACCOMMODATIONS as No")
     public void select_ACCOMMODATIONS_as_No() throws InterruptedException {
         this.driver.findElement(By.xpath("//span[@class='mat-expansion-indicator ng-tns-c133-16 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']")).click();
-        Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("/html/body/exai-root/exai-custom-layout/exai-layout/div/mat-sidenav-container/mat-sidenav-content/main/exai-application/div[2]/div[1]/div/exai-form-builder/div/exai-dynamic-form-component/div/div/mat-card/div/mat-accordion/mat-expansion-panel[2]/div/div/div[2]/form/dynamic-material-form/dynamic-material-form-control/div/dynamic-material-form-group/div/dynamic-material-form-control[2]/div/dynamic-material-radio-group/mat-radio-group/mat-radio-button[2]/label/span[1]/span[2]")).click();
-        //label[@for='mat-radio-48-input']//span[@class='mat-radio-inner-circle']
-
+        Thread.sleep(800L);
+        this.driver.findElement(By.xpath("//label[@for='mat-radio-11-input']//span[@class='mat-radio-inner-circle']")).click();
     }
+
     @When("Certify REGISTRANT CERTIFICATION")
     public void certify_REGISTRANT_CERTIFICATION() throws InterruptedException {
         this.driver.findElement(By.xpath("//span[@class='mat-expansion-indicator ng-tns-c133-18 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']")).click();
@@ -152,11 +148,9 @@ public class StepER2 {
     public void candidate_can_view_confirmation_message(String string) throws InterruptedException, IOException {
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\MSER2_AppSubmitted_CR.png");
+        File trg = new File(".\\screenshots\\MSER3_AppSubmitted_CR.png");
         FileUtils.copyFile(src, trg);
     }
-
-    //OperationStaff
 
     @Given("Launch Chrome Browser")
     public void launch_Chrome_Browser() throws InterruptedException {
@@ -222,7 +216,7 @@ public class StepER2 {
     public void login_to_candidate_and_validate_approved_status() throws InterruptedException, IOException {
         this.driver.get("https://credentiauat.examroom.ai/");
         this.driver.findElement(By.xpath("/html/body/main/div/div/div[2]/div/div/a")).click();
-        this.driver.findElement(By.xpath("//*[@id=\"mat-input-0\"]")).sendKeys(new CharSequence[]{"jmcandidatems1@mailinator.com"});
+        this.driver.findElement(By.xpath("//*[@id=\"mat-input-0\"]")).sendKeys(new CharSequence[]{"jmcandidatems@mailinator.com"});
         this.driver.findElement(By.xpath("//*[@id=\"mat-input-1\"]")).sendKeys(new CharSequence[]{"Exam@123"});
         this.driver.findElement(By.xpath("/html/body/exai-root/exai-login/div/div/form/button")).click();
         Thread.sleep(30000L);
@@ -231,7 +225,7 @@ public class StepER2 {
         Assert.assertEquals(actual_status, expected_status);
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\MSER2Application Approved by TP.png");
+        File trg = new File(".\\screenshots\\MSER3Application Approved by TP.png");
         FileUtils.copyFile(src, trg);
     }
 
@@ -242,7 +236,7 @@ public class StepER2 {
         this.driver.manage().window().maximize();
         this.driver.get("https://credentiauat.examroom.ai/");
         this.driver.findElement(By.xpath("/html/body/main/div/div/div[2]/div/div/a")).click();
-        this.driver.findElement(By.xpath("//*[@id=\"mat-input-0\"]")).sendKeys(new CharSequence[]{"jmcandidatems1@mailinator.com"});
+        this.driver.findElement(By.xpath("//*[@id=\"mat-input-0\"]")).sendKeys(new CharSequence[]{"jmcandidatems@mailinator.com"});
         this.driver.findElement(By.xpath("//*[@id=\"mat-input-1\"]")).sendKeys(new CharSequence[]{"Exam@123"});
         this.driver.findElement(By.xpath("/html/body/exai-root/exai-login/div/div/form/button")).click();
         Thread.sleep(30000L);
@@ -304,7 +298,7 @@ public class StepER2 {
     public void validate_Added_to_cart_Successfully_Message() throws InterruptedException, IOException {
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\MSER2_Exam_Added_toCart.png");
+        File trg = new File(".\\screenshots\\MSER3_Exam_Added_toCart.png");
         FileUtils.copyFile(src, trg);
         this.driver.findElement(By.xpath("//mat-icon[normalize-space()='close']")).click();
         Thread.sleep(1000L);
@@ -330,7 +324,7 @@ public class StepER2 {
     public void validate_Card_Saved_Successfully_message() throws IOException {
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\MSER2_Save_Card.png");
+        File trg = new File(".\\screenshots\\MSER3_Save_Card.png");
         FileUtils.copyFile(src, trg);
     }
 
@@ -367,7 +361,7 @@ public class StepER2 {
         Assert.assertEquals(actual_status, expected_status);
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\MSER2_ExamScheduled.png");
+        File trg = new File(".\\screenshots\\MSER3_ExamScheduled.png");
         FileUtils.copyFile(src, trg);
         Thread.sleep(1000L);
     }
@@ -378,7 +372,7 @@ public class StepER2 {
         Thread.sleep(10000L);
         TakesScreenshot ts = (TakesScreenshot)this.driver;
         File src = (File)ts.getScreenshotAs(OutputType.FILE);
-        File trg = new File(".\\screenshots\\MSER2_Exam_Dashboard.png");
+        File trg = new File(".\\screenshots\\MSER3_Exam_Dashboard.png");
         FileUtils.copyFile(src, trg);
     }
 }

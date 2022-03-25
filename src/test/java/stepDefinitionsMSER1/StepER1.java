@@ -1,28 +1,21 @@
-package stepDefinitions;
+package stepDefinitionsMSER1;
 
-import ch.qos.logback.core.util.FileUtil;
-
-import io.cucumber.java.en.*;
-import javafx.scene.input.InputMethodTextRun;
-import jdk.nashorn.internal.ir.IfNode;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.commons.io.FileUtils;
-import org.apache.tools.ant.types.selectors.SelectSelector;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class StepCandidate {
+public class StepER1 {
     WebDriver driver;
     public static WebElement element;
 
@@ -34,10 +27,10 @@ public class StepCandidate {
 
     @Given(": Connect to DB")
     public void connect_to_DB() throws SQLException {
+        Connection con = DriverManager.getConnection("jdbc:sqlserver:sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com:1433;"+"databaseName=ExamRoomV2UAT", "ExamRoomV2UatUser", "S0oprS3cur1t3M@n");
+        // Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com/ExamRoomV2UAT","ExamRoomV2UatUser","S0oprS3cur1t3M@n");
+        //Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com;databaseName=ExamRoomV2UAT","ExamRoomV2UatUser","S0oprS3cur1t3M@n");
 
-            Connection con = DriverManager.getConnection("jdbc:sqlserver:sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com:1433;"+"databaseName=ExamRoomV2UAT","ExamRoomV2UatUser", "S0oprS3cur1t3M@n");
-            // Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.czljrwemwniw.us-east-2.rds.amazonaws.com/ExamRoomV2UAT","ExamRoomV2UatUser","S0oprS3cur1t3M@n");
-            //Connection con= DriverManager.getConnection("jdbc:sqlserver://sqlexamroom.cz
 
         Statement stmt = con.createStatement();
         String query = "GO\n" +
@@ -188,9 +181,8 @@ public class StepCandidate {
     }
 
     @When("Click on Eligibility Route {int}")
-    public void click_on_Eligibility_Route(Integer int1) throws IOException
-    {
-        driver.findElement(By.xpath("/html/body/exai-root/exai-custom-layout/exai-layout/div/mat-sidenav-container/mat-sidenav-content/main/exai-application/div/div[2]/div[1]/div/div[3]/div/button[1]")).click();
+    public void click_on_Eligibility_Route(Integer int1) throws IOException {
+        driver.findElement(By.xpath("//body//exai-root//button[6]")).click();
 
         TakesScreenshot ts = (TakesScreenshot) driver;
         File src = ts.getScreenshotAs(OutputType.FILE);
@@ -273,180 +265,16 @@ public class StepCandidate {
     }
 
     @When("Select ACCOMMODATIONS as Yes")
-    public void select_ACCOMMODATIONS_as_yes() throws InterruptedException {
+    public void select_ACCOMMODATIONS_as_No() throws InterruptedException {
         driver.findElement(By.xpath("//span[@class='mat-expansion-indicator ng-tns-c133-16 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']")).click();
         //span[@class='mat-expansion-indicator ng-tns-c133-16 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("(//span[@class='mat-radio-outer-circle'])[1]")).click();
-    }
-    @When("Click on Accommodation Form")
-    public void click_on_accommodation_form() throws InterruptedException {
-
-        driver.findElement(By.xpath("//span[@class='mat-expansion-indicator ng-tns-c133-32 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']")).click();
-         Thread.sleep(800);
-    }
-    @When("Enter Request Accommodation details_Accommodation Type")
-    public void enter_request_accommodation_details_accommodation_type() throws InterruptedException {
-        driver.findElement(By.xpath("//*[@id=\"98d0f83a61a64b14a3e4f5ffc7b3609c\"]/div/div[2]")).click();
         Thread.sleep(800);
-        driver.findElement(By.xpath("//span[contains(text(),'Learning and other Cognitive Disorders')]")).click();
-        Thread.sleep(800);
-    }
-    @When("Enter Request Accommodation details_Request item type")
-    public void enter_request_accommodation_details_request_item_type() throws InterruptedException {
-        driver.findElement(By.xpath("//*[@id=\"f6f95c9626874226b1814854d384a3d3\"]/div/div[2]/div")).click();
-        //*[@id="f6f95c9626874226b1814854d384a3d3"]/div/div[2]/div
-        Thread.sleep(800);
-       WebElement Requesttype= driver.findElement(By.xpath("/html/body/div[3]/div[2]/div/div/div/mat-option[1]/mat-pseudo-checkbox"));
-        //Full xpath
-
-
-       Requesttype.click();
-
-        Thread.sleep(2000);
+        driver.findElement(By.xpath("//label[@for='mat-radio-12-input']//span[@class='mat-radio-inner-circle']")).click();
     }
 
-    @When("Enter Request Accommodation details_Exam type")
-    public void enter_request_accommodation_details_exam_type() throws InterruptedException
-    {
-//Instantiate Action Class
-        Actions actions = new Actions(driver);
-        WebElement examtype= driver.findElement(By.xpath("//*[@id=\"44fb1386ceed4ff3b429f7ea3f85ed1b\"]/div/div[2]"));
-        //Double Click the button
-        actions.doubleClick(examtype).perform();
-        Thread.sleep(800);
-        WebElement selexm=  driver.findElement(By.xpath("/html/body/div[3]/div[2]/div/div/div/mat-option[1]/mat-pseudo-checkbox"));
-
-        actions.click(selexm).perform();
-
-
-//driver.findElement(By.xpath("//mat-option[@id='mat-option-57']//mat-pseudo-checkbox[@class='mat-pseudo-checkbox mat-option-pseudo-checkbox ng-star-inserted']")).click();
-
-    }
-    @When("Enter Request Accommodation details_Reason for Accommodation")
-    public void enter_request_accommodation_details_reason_for_accommodation() throws InterruptedException {
-
-     driver.findElement(By.xpath("//input[@id='3b39de6e49a24383a6da81c2083ee4ef']")).sendKeys("Needed as physically");
-
-        //driver.findElement(By.xpath("//mat-pseudo-checkbox[@class='mat-pseudo-checkbox mat-option-pseudo-checkbox ng-star-inserted mat-pseudo-checkbox-checked']")).click();
-       //driver.findElement(By.xpath("//mat-option[@id='mat-option-27']//mat-pseudo-checkbox[@class='mat-pseudo-checkbox mat-option-pseudo-checkbox ng-star-inserted']")).click();
-       // driver.findElement(By.xpath("//mat-option[@id='mat-option-29']//mat-pseudo-checkbox[@class='mat-pseudo-checkbox mat-option-pseudo-checkbox ng-star-inserted mat-pseudo-checkbox-checked']")).click();
-
-
-    }
-    @When("Enter Permitted Contact Details_Name")
-    public void enter_permitted_contact_details_name() throws InterruptedException {
-        driver.findElement(By.xpath("//input[@id='09e12cf8bfcb4cd9a36684447e10a000']")).sendKeys("Jaga M");
-
-        Thread.sleep(5000);
-    }
-
-    @When("Enter Permitted Contact Details_Email")
-    public void enter_permitted_contact_details_email() {
-        driver.findElement(By.xpath("//input[@id='62d12f1e23fb47de941ca35d8e687463']")).sendKeys("jbm@gmail.com");
-
-    }
-    @When("Enter Permitted Contact Details_Phone Number")
-    public void enter_permitted_contact_details_phone_number() {
-        driver.findElement(By.xpath("//input[@id='1853864909d84a90bcf531c86b8a6dd9']")).sendKeys("1288888888");
-
-    }
-
-    @When("Enter Permitted Contact Details_Relationship")
-    public void enter_permitted_contact_details_relationship() throws InterruptedException {
-
-        Actions actions= new Actions(driver);
-
-        WebElement relationship= driver.findElement(By.xpath("//*[@id=\"5b6d464ce1e143d4a208c8d78fe7e1a5\"]/div/div[2]/div"));
-        // relationship.click();
-        actions.doubleClick(relationship).perform();
-        Thread.sleep(1000);
-        WebElement relselct= driver.findElement(By.xpath("/html/body/div[3]/div[2]/div/div/div/mat-option[2]/span/span"));
-        //relselct.click();
-        actions.click(relselct).perform();
-    }
-    @And("Enter I authorize Credentia to communicate with my contacts for the date range specified below_up to a maximum of one year")
-    public void enterIAuthorizeCredentiaToCommunicateWithMyContactsForTheDateRangeSpecifiedBelow_upToAMaximumOfOneYear()
-    {
-       WebDriverWait wait = new WebDriverWait(driver, 800);
-
-       WebElement calend = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"accomodation_accomodation_dates\"]/dynamic-material-form-control[1]/div/dynamic-material-datepicker/mat-form-field/div/div[1]/div[4]/mat-datepicker-toggle/button")));
-       //WebElement calend = driver.findElement(By.xpath("//mat-datepicker-toggle[@class='mat-datepicker-toggle ng-tns-c79-133']//button[@aria-label='Open calendar']"));
-        calend.click();
-
-        while (true) {
-            String tex = driver.findElement(By.xpath("//button[@aria-label='Choose month and year']")).getText();
-            String mont = "MAR 2022";
-
-            if (tex.equals(mont)) {
-                break;
-            } else {
-
-                driver.findElement(By.xpath("//button[@aria-label='Previous month']")).click();
-            }
-        }
-
-
-        driver.findElement(By.xpath("//div[normalize-space()='7']")).click();
-
-        //*[@id="accomodation_accomodation_dates"]/dynamic-material-form-control[2]/div/dynamic-material-datepicker/mat-form-field/div/div[1]/div[4]/mat-datepicker-toggle/button
-
-        WebDriverWait wait1 = new WebDriverWait(driver, 800);
-
-        WebElement calend1 = wait1.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"accomodation_accomodation_dates\"]/dynamic-material-form-control[2]/div/dynamic-material-datepicker/mat-form-field/div/div[1]/div[4]/mat-datepicker-toggle/button")));
-        //WebElement calend = driver.findElement(By.xpath("//mat-datepicker-toggle[@class='mat-datepicker-toggle ng-tns-c79-133']//button[@aria-label='Open calendar']"));
-        calend1.click();
-
-        while (true) {
-            String tex1 = driver.findElement(By.xpath("//button[@aria-label='Choose month and year']")).getText();
-            String mont1 = "APR 2022";
-
-            if (tex1.equals(mont1)) {
-                break;
-            } else {
-
-                driver.findElement(By.xpath("//button[@aria-label='Next month']")).click();
-            }
-        }
-
-
-        driver.findElement(By.xpath("//div[normalize-space()='7']")).click();
-
-
-
-    }
-    @When("Upload the form provided above based on your accommodation type selection, filled and Signed by appropriate medical professional")
-    public void upload_the_form_provided_above_based_on_your_accommodation_type_selection_filled_and_signed_by_appropriate_medical_professional() throws InterruptedException, IOException {
-
-        WebElement uploaddocument = this.driver.findElement(By.xpath("//button[@class='mat-focus-indicator btn-2 text-xs mat-button mat-button-base ng-star-inserted']"));
-        uploaddocument.click();
-        Thread.sleep(1000L);
-        Runtime.getRuntime().exec("C:\\Autoitfile\\fileupload.exe D:\\Document\\Noodles-MSLocations_Address.pdf");
-        Thread.sleep(1000L);
-    }
-    @When("Agree to Guidelines_Does your documentation contain a clear diagnosis and discuss the impacts of your diagnosis on your performance?")
-    public void agree_to_guidelines_does_your_documentation_contain_a_clear_diagnosis_and_discuss_the_impacts_of_your_diagnosis_on_your_performance() {
-driver.findElement(By.xpath("//label[@for='10b7ca5534de409784704534fe195eba-input']//span[@class='mat-checkbox-inner-container']")).click();
-
-
-    }
-    @When("Was the documentation completed by a professional qualified to diagnose your disorder?")
-    public void was_the_documentation_completed_by_a_professional_qualified_to_diagnose_your_disorder() {
-
-        driver.findElement(By.xpath("//label[@for='f61f6c22cd244675a51e53a27c2dec74-input']//span[@class='mat-checkbox-inner-container']")).click();
-    }
-    @And("Was the documentation completed within the last {int} year?")
-    public void wasTheDocumentationCompletedWithinTheLastYear(int arg0) throws InterruptedException {
-        driver.findElement(By.xpath("//label[@for='729e85283fa74539b4cdad375b541f39-input']//span[@class='mat-checkbox-inner-container']")).click();
-         Thread.sleep(1500);
-
-    }
     @When("Certify REGISTRANT CERTIFICATION")
     public void certify_REGISTRANT_CERTIFICATION() throws InterruptedException {
-        driver.findElement(By.xpath("//span[@class='mat-expansion-indicator ng-tns-c133-32 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']")).click();
-        Thread.sleep(800);
-
-        driver.findElement(By.xpath("/html/body/exai-root/exai-custom-layout/exai-layout/div/mat-sidenav-container/mat-sidenav-content/main/exai-application/div[2]/div[1]/div/exai-form-builder/div/exai-dynamic-form-component/div/div/mat-card/div/mat-accordion/mat-expansion-panel[3]/mat-expansion-panel-header/span[2]")).click();
+        driver.findElement(By.xpath("//span[@class='mat-expansion-indicator ng-tns-c133-18 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']")).click();
         Thread.sleep(1500);
         //span[@class='mat-expansion-indicator ng-tns-c133-18 ng-trigger ng-trigger-indicatorRotate ng-star-inserted']
         driver.findElement(By.xpath("//span[@class='mat-checkbox-inner-container']")).click();

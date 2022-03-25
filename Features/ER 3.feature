@@ -1,4 +1,4 @@
-Feature: Candidate_Validate End to End Review process Flow for Eligibility Route 2 and Schedule the exam
+Feature: Candidate_Validate End to End Review process Flow for Eligibility Route 3 and Schedule the exam
   @ClearDB
   Scenario: Clear Application and exam from Database
     Given : Connect to DB
@@ -16,7 +16,7 @@ Feature: Candidate_Validate End to End Review process Flow for Eligibility Route
     #Then Candidate can view Dashboard details
     #When Candidate click on Dashboard
     And Click on Start New Application
-    And Click on Eligibility Route2
+    And Click on Eligibility Route3
     And click on check box
     And click on Start button
     When Candidate Fill the Application Form_SECTION1 UPLOAD CERTIFICATE
@@ -25,7 +25,7 @@ Feature: Candidate_Validate End to End Review process Flow for Eligibility Route
     And  Click on Submit Button
     Then Candidate can view confirmation message  "Successfully Saved Response."
     #And close browser
-  @AppApproveOP
+  @AppApprove
   Scenario: Approve Application from Operation staff Credentia
     Given Launch Chrome Browser
     When OP opens URL "https://credentiauat.examroom.ai/"
