@@ -74,7 +74,7 @@ public class StepER8 {
         this.driver.findElement(By.xpath("//*[@id=\"mat-input-0\"]")).sendKeys(new CharSequence[]{"jmcandidatems@mailinator.com"});
         this.driver.findElement(By.xpath("//*[@id=\"mat-input-1\"]")).sendKeys(new CharSequence[]{"Exam@123"});
     }
-
+//Test
     @When("Candidate click on login button")
     public void candidate_click_on_login_button() throws InterruptedException {
         this.driver.findElement(By.xpath("/html/body/exai-root/exai-login/div/div/form/button")).click();

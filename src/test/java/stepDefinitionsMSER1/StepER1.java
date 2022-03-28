@@ -23,8 +23,7 @@ public class StepER1 {
     public void main(String[] args) {
 
     }
-    // String month = "MAY 2020";
-    //String exp_date = "7";
+
 
     @Given(": Connect to DB")
     public void connect_to_DB() throws SQLException {
