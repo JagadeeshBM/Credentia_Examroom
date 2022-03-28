@@ -45,7 +45,7 @@ public class StepER5 {
     @When(":Run Cleanup query for Exams")
     public void run_Cleanup_query_for_Exams() {
     }
-
+//Test
     @Then(":Application should be cleared")
     public void application_should_be_cleared() {
     }
