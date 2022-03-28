@@ -143,8 +143,7 @@ public class StepER1 {
     }
 
     //@Then("Candidate can view Dashboard details")
-    //public void candidate_can_view_Dashboard_details()
-    //{
+
 
     //}
 

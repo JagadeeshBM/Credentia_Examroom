@@ -29,7 +29,7 @@ public class StepCandidate {
     public void main(String[] args) {
 
     }
-    // String month = "MAY 2020";
+
 
 
     @Given(": Connect to DB")

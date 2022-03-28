@@ -1,5 +1,5 @@
 Feature: Candidate_Validate End to End Review process Flow for Eligibility Route 8 and Schedule the exam
-  @ClearUATDB
+  @ClearDB
   Scenario: Clear Application and exam from Database
     Given : Connect to DB
     When :Run cleanup query for Applications

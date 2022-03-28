@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
         //tags="@ClearDB"
         //tags="@RegisterForExam"
         //tags={"@AppApprove"}
-        //Test
+
 )
 public class TestRunner
 {

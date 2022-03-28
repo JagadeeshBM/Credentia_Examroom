@@ -37,7 +37,7 @@ public class StepER6 {
         stmt.executeQuery(query);
         System.out.println("Application is cleared successfully");
     }
-//Test
+
     @When(":Run cleanup query for Applications")
     public void run_cleanup_query_for_Applications() {
     }
